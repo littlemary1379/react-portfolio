@@ -2,28 +2,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import * as MathUtil from './util/MathUtil.js';
 import {fabric} from 'fabric';
 
 var circle;
+var topPosition;
+var leftPositon;
 
 const App = () => {
 
   const [canvas, setCanvas] = useState('');
   //const [circle, setCircle] = useState('');
-  const [top, setTop] = useState('');
-  const [left, setLeft] = useState('');
+  // const [top, setTop] = useState('');
+  // const [left, setLeft] = useState('');
 
   useEffect(() => {
     setCanvas(initCanvas());
-  }, [top, left]);
+  }, []);
 
-  useEffect(() => {
-    setTop(randomTop())
-  }, [])
+  // useEffect(() => {
+  //   setTop(randomTop())
+  // }, [])
 
-  useEffect(() => {
-    setLeft(randomLeft())
-  }, [])
+  // useEffect(() => {
+  //   setLeft(randomLeft())
+  // }, [])
 
   const initCanvas = () => {
     const canvas = new fabric.Canvas('canvas', {
@@ -35,10 +38,14 @@ const App = () => {
 
     //canvas.onSelect = false
 
+    topPosition = MathUtil.randomPosition(50)
+    leftPositon = MathUtil.randomPosition(50)
+
+
     circle = new fabric.Circle ({
       id: 1,
-      top : top,
-      left : left,
+      top : topPosition,
+      left : leftPositon,
       radius : 50,
       fill : '#eb9f9f'
     })
@@ -72,6 +79,7 @@ const App = () => {
   const randomTop = () => {
     const top = Math.random()*800;
     console.log("??????"+ top);
+    MathUtil.randomPosition(50)
     return top
   }
 
