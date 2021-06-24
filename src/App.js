@@ -5,6 +5,7 @@ import './App.css';
 import * as MathUtil from './util/MathUtil.js';
 import {fabric} from 'fabric';
 
+var outCanvas;
 var circle;
 var topPosition;
 var leftPositon;
@@ -12,21 +13,11 @@ var leftPositon;
 const App = () => {
 
   const [canvas, setCanvas] = useState('');
-  //const [circle, setCircle] = useState('');
-  // const [top, setTop] = useState('');
-  // const [left, setLeft] = useState('');
+
 
   useEffect(() => {
     setCanvas(initCanvas());
   }, []);
-
-  // useEffect(() => {
-  //   setTop(randomTop())
-  // }, [])
-
-  // useEffect(() => {
-  //   setLeft(randomLeft())
-  // }, [])
 
   const initCanvas = () => {
     const canvas = new fabric.Canvas('canvas', {
@@ -35,6 +26,8 @@ const App = () => {
       backgroundColor : 'rgb(250,250,250)',
       selection : false
     })
+
+    outCanvas = canvas
 
     //canvas.onSelect = false
 
@@ -53,10 +46,9 @@ const App = () => {
     
     circle.selectable = false
 
-    canvas.add(circle)
-    canvas.renderAll()
+    outCanvas.add(circle)
 
-    lotation()
+    lotation(canvas)
     setListener(circle)
 
     return canvas
@@ -73,20 +65,67 @@ const App = () => {
   } 
 
   const lotation = () => {
+    const random = Math.round(Math.random()*3)
+      console.log("???????"+random);
 
-  }
+      if(random===0) {
+        console.log("x 양수 y 양수 이동")
+        setInterval(() => {
+          topPosition = topPosition+5
+          leftPositon = leftPositon+5
+          circle.set({
+            top : topPosition,
+            left : leftPositon
+          })
 
-  const randomTop = () => {
-    const top = Math.random()*800;
-    console.log("??????"+ top);
-    MathUtil.randomPosition(50)
-    return top
-  }
+          outCanvas.renderAll()
+        },30)
+      } else if(random===1) {
+        console.log("x 양수 y 음수 이동")
+        setInterval(() => {
+          topPosition = topPosition+5
+          leftPositon = leftPositon-5
+          console.log(topPosition);
+          console.log(leftPositon);
 
-  const randomLeft = () => {
-    const left = Math.random()*800;
-    console.log("??????"+ left);
-    return left
+          circle.set({
+            top : topPosition,
+            left : leftPositon
+          })
+
+          outCanvas.renderAll()
+        },30)
+      } else if(random===2) {
+      console.log("x 음수 y 양수 이동")
+      setInterval(() => {
+        topPosition = topPosition-5
+        leftPositon = leftPositon+5
+        console.log(topPosition);
+        console.log(leftPositon);
+
+        circle.set({
+          top : topPosition,
+          left : leftPositon
+        })
+
+        outCanvas.renderAll()
+      },30)
+      } else {
+        console.log("x 음수 y 음수 이동")
+        setInterval(() => {
+          topPosition = topPosition-5
+          leftPositon = leftPositon-5
+          console.log(topPosition);
+          console.log(leftPositon);
+
+          circle.set({
+            top : topPosition,
+            left : leftPositon
+          })
+
+          outCanvas.renderAll()
+        },30)
+      }
   }
 
   return (
