@@ -67,65 +67,81 @@ const App = () => {
   const lotation = () => {
     const random = Math.round(Math.random()*3)
       console.log("???????"+random);
+      var intervalTime = 20;
 
-      if(random===0) {
-        console.log("x 양수 y 양수 이동")
-        setInterval(() => {
-          topPosition = topPosition+5
-          leftPositon = leftPositon+5
-          circle.set({
-            top : topPosition,
-            left : leftPositon
-          })
-
-          outCanvas.renderAll()
-        },30)
-      } else if(random===1) {
-        console.log("x 양수 y 음수 이동")
-        setInterval(() => {
-          topPosition = topPosition+5
-          leftPositon = leftPositon-5
-          console.log(topPosition);
-          console.log(leftPositon);
-
-          circle.set({
-            top : topPosition,
-            left : leftPositon
-          })
-
-          outCanvas.renderAll()
-        },30)
-      } else if(random===2) {
-      console.log("x 음수 y 양수 이동")
       setInterval(() => {
-        topPosition = topPosition-5
-        leftPositon = leftPositon+5
-        console.log(topPosition);
-        console.log(leftPositon);
 
-        circle.set({
-          top : topPosition,
-          left : leftPositon
-        })
+        if(random===0) {
+          //console.log("x 양수 y 양수 이동")
+          
+            topPosition = topPosition+5
+            leftPositon = leftPositon+5
+            circle.set({
+              top : topPosition,
+              left : leftPositon
+            })
+  
+            outCanvas.renderAll()
 
-        outCanvas.renderAll()
-      },30)
-      } else {
-        console.log("x 음수 y 음수 이동")
-        setInterval(() => {
+            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+              console.log("벽을 만낫음")
+            }
+          
+        } else if(random===1) {
+          //console.log("x 양수 y 음수 이동")
+          
+            topPosition = topPosition+5
+            leftPositon = leftPositon-5
+  
+            circle.set({
+              top : topPosition,
+              left : leftPositon
+            })
+
+            outCanvas.renderAll()
+
+            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+              console.log("벽을 만낫음")
+            }
+          
+        } else if(random===2) {
+        //console.log("x 음수 y 양수 이동")
+        
           topPosition = topPosition-5
-          leftPositon = leftPositon-5
-          console.log(topPosition);
-          console.log(leftPositon);
-
+          leftPositon = leftPositon+5
+  
           circle.set({
             top : topPosition,
             left : leftPositon
           })
 
           outCanvas.renderAll()
-        },30)
-      }
+
+          if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+            console.log("벽을 만낫음")
+          }
+        
+        } else {
+          //console.log("x 음수 y 음수 이동")
+          
+            topPosition = topPosition-5
+            leftPositon = leftPositon-5
+  
+            circle.set({
+              top : topPosition,
+              left : leftPositon
+            })
+  
+            outCanvas.renderAll()
+
+            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+              console.log("벽을 만낫음")
+            }
+    
+        }
+
+      }, intervalTime)
+      
   }
 
   return (
