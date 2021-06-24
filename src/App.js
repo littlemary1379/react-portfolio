@@ -46,7 +46,7 @@ const App = () => {
     
     circle.selectable = false
 
-    outCanvas.add(circle)
+    
 
     lotation(canvas)
     setListener(circle)
@@ -65,15 +65,14 @@ const App = () => {
   } 
 
   const lotation = () => {
-    const random = Math.round(Math.random()*3)
+    let random = Math.round(Math.random()*3)
       console.log("???????"+random);
       var intervalTime = 20;
 
       setInterval(() => {
 
         if(random===0) {
-          //console.log("x 양수 y 양수 이동")
-          
+     
             topPosition = topPosition+5
             leftPositon = leftPositon+5
             circle.set({
@@ -81,14 +80,20 @@ const App = () => {
               left : leftPositon
             })
   
+            outCanvas.add(circle)
             outCanvas.renderAll()
 
-            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+            if(topPosition < 0 || topPosition > 800-100 || leftPositon < 0 || leftPositon > 800-100) {
               console.log("벽을 만낫음")
+
+              if(topPosition > 800-100) {
+                random = 2
+              } else if(leftPositon > 800-100) {
+                random = 1
+              }
             }
           
         } else if(random===1) {
-          //console.log("x 양수 y 음수 이동")
           
             topPosition = topPosition+5
             leftPositon = leftPositon-5
@@ -98,14 +103,20 @@ const App = () => {
               left : leftPositon
             })
 
+            outCanvas.add(circle)
             outCanvas.renderAll()
 
-            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+            if(topPosition < 0 || topPosition > 800-100 || leftPositon < 0 || leftPositon > 800-100) {
               console.log("벽을 만낫음")
+
+              if(topPosition > 800-100) {
+                random = 3
+              } else if(leftPositon < 0) {
+                random = 0
+              }
             }
           
         } else if(random===2) {
-        //console.log("x 음수 y 양수 이동")
         
           topPosition = topPosition-5
           leftPositon = leftPositon+5
@@ -115,14 +126,21 @@ const App = () => {
             left : leftPositon
           })
 
+          outCanvas.add(circle)
           outCanvas.renderAll()
 
-          if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+          if(topPosition < 0 || topPosition > 800-100 || leftPositon < 0 || leftPositon > 800-100) {
             console.log("벽을 만낫음")
+
+            
+            if(topPosition < 0) {
+              random = 0
+            } else if(leftPositon > 800-100) {
+              random = 3
+            }
           }
         
         } else {
-          //console.log("x 음수 y 음수 이동")
           
             topPosition = topPosition-5
             leftPositon = leftPositon-5
@@ -132,10 +150,17 @@ const App = () => {
               left : leftPositon
             })
   
+            outCanvas.add(circle)
             outCanvas.renderAll()
 
-            if(topPosition < 50 || topPosition > 800-50 || leftPositon < 50 || leftPositon > 800-50) {
+            if(topPosition < 0 || topPosition > 800-100 || leftPositon < 0 || leftPositon > 800-100) {
               console.log("벽을 만낫음")
+
+              if(topPosition < 0) {
+                random = 1
+              } else if(leftPositon < 0) {
+                random = 2
+              }
             }
     
         }
